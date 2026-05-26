@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascadi – Desarrollo Inmobiliario</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B3055;--navy-dk:#0f1e35;--navy-md:#243d68;--gold:#C9A46A;--gold-lt:#d4b47a;--grey:#CDCEBE;--grey-lt:#f3f3f1;--white:#fff;--muted:#6b7280;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',system-ui,sans-serif;color:var(--navy);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 6%;transition:all .4s;}
+nav.scrolled{background:var(--navy-dk);padding:0.9rem 6%;box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;font-weight:900;color:#fff;letter-spacing:.2em;text-decoration:none;}
+.logo-g{color:var(--gold);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-btn{background:var(--gold);color:var(--navy-dk);padding:.55rem 1.5rem;font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all .2s;}
+.nav-btn:hover{background:var(--gold-lt);}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy-dk);display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=80') center/cover;opacity:.13;}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(110deg,var(--navy-dk) 45%,rgba(15,30,53,.5) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 6%;padding-top:5rem;max-width:870px;}
+.eyebrow{display:inline-flex;align-items:center;gap:1rem;border:1px solid rgba(201,164,106,.5);color:var(--gold);padding:.4rem 1.2rem;font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;margin-bottom:2rem;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(3.5rem,8vw,6.2rem);font-weight:900;color:#fff;line-height:1;text-transform:uppercase;margin-bottom:1.5rem;}
+h1 .g{color:var(--gold);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:480px;font-weight:300;margin-bottom:3rem;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-p{background:var(--gold);color:var(--navy-dk);padding:1rem 2.5rem;font-family:'Barlow',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-block;border:none;cursor:pointer;}
+.btn-p:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.btn-gh{background:transparent;color:#fff;padding:1rem 2.5rem;font-family:'Barlow',sans-serif;font-size:.9rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.3);transition:all .2s;display:inline-block;}
+.btn-gh:hover{border-color:var(--gold);color:var(--gold);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:6%;display:flex;align-items:center;gap:1rem;color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;}
+.scroll-line{width:40px;height:1px;background:var(--gold);animation:pls 2s infinite;}
+@keyframes pls{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* SECTION BASE */
+section{padding:6rem 6%;}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:block;}
+.h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;text-transform:uppercase;color:var(--navy);line-height:1.05;}
+.div{width:50px;height:3px;background:var(--gold);margin:1.2rem 0 1.5rem;}
+.lead{font-size:1rem;color:var(--muted);line-height:1.75;max-width:480px;font-weight:400;}
+
+/* ABOUT */
+.about{background:var(--grey-lt);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem;}
+.img-wrap{position:relative;}
+.img-wrap img{width:100%;height:480px;object-fit:cover;display:block;}
+.img-acc{position:absolute;bottom:-1.5rem;right:-1.5rem;width:180px;height:180px;border:3px solid var(--gold);z-index:0;pointer-events:none;}
+.badge{position:absolute;bottom:2rem;left:-2rem;z-index:2;background:var(--navy);color:#fff;padding:1.2rem 1.5rem;min-width:155px;}
+.badge big{display:block;font-family:'Barlow Condensed',sans-serif;font-size:3rem;font-weight:900;color:var(--gold);line-height:1;}
+.badge small{font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem;}
+.feat{display:flex;gap:.9rem;align-items:flex-start;padding:1rem;background:#fff;border-left:3px solid var(--gold);}
+.f-icon{width:36px;height:36px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.f-icon svg{width:17px;height:17px;stroke:var(--gold);fill:none;stroke-width:2;}
+.feat h4{font-size:.87rem;font-weight:700;color:var(--navy);margin-bottom:.2rem;}
+.feat p{font-size:.78rem;color:var(--muted);line-height:1.5;}
+
+/* STATS */
+.stats{background:var(--navy);padding:5rem 6%;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:2.5rem 2rem;text-align:center;border-right:1px solid rgba(201,164,106,.15);}
+.stat:last-child{border-right:none;}
+.snum{font-family:'Barlow Condensed',sans-serif;font-size:4.5rem;font-weight:900;color:#fff;line-height:1;}
+.slbl{font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.6rem;}
+
+/* PROJECTS */
+.projects{background:#fff;}
+.proj-header{margin-bottom:3rem;}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.pcard{cursor:pointer;}
+.pimg{overflow:hidden;}
+.pimg img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .6s ease;}
+.pcard:hover .pimg img{transform:scale(1.06);}
+.pbody{padding:1.25rem 0 0;}
+.pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.25rem .75rem;margin-bottom:.6rem;}
+.pill-a{background:rgba(201,164,106,.12);color:var(--gold);border:1px solid var(--gold);}
+.pill-d{background:rgba(27,48,85,.08);color:var(--navy);border:1px solid var(--navy);}
+.pname{font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:700;text-transform:uppercase;color:var(--navy);margin-bottom:.2rem;}
+.ploc{font-size:.82rem;color:var(--muted);}
+
+/* WHY */
+.why{background:var(--grey-lt);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem;}
+.why-img img{width:100%;height:500px;object-fit:cover;display:block;}
+.wcards{display:flex;flex-direction:column;gap:1.25rem;}
+.wcard{background:#fff;padding:1.5rem 1.5rem 1.5rem 1.25rem;border-left:4px solid var(--gold);display:flex;gap:1rem;transition:transform .25s;}
+.wcard:hover{transform:translateX(6px);}
+.wn{font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--gold);opacity:.3;line-height:1;flex-shrink:0;width:2rem;}
+.wcard h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;}
+.wcard p{font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+/* CTA */
+.cta{background:var(--navy-dk);padding:7rem 6%;text-align:center;position:relative;overflow:hidden;}
+.cta-ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-size:18rem;font-weight:900;color:rgba(255,255,255,.025);letter-spacing:.3em;pointer-events:none;white-space:nowrap;user-select:none;}
+.cta .tag{color:var(--gold);}
+.cta .h2{color:#fff;}
+.cta .lead{color:rgba(255,255,255,.55);margin:0 auto 2.5rem;}
+.cta-form{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;max-width:560px;margin:0 auto;}
+.cta-form input{flex:1;min-width:180px;padding:1rem 1.25rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#fff;font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s;}
+.cta-form input::placeholder{color:rgba(255,255,255,.35);}
+.cta-form input:focus{border-color:var(--gold);}
+.cta-note{margin-top:1.2rem;font-size:.78rem;color:rgba(255,255,255,.3);}
+.cta-note a{color:var(--gold);text-decoration:none;}
+.thanks{display:none;color:var(--gold);font-size:1rem;font-weight:600;letter-spacing:.05em;margin-top:1.5rem;}
+
+/* FOOTER */
+footer{background:var(--navy-dk);border-top:1px solid rgba(255,255,255,.06);padding:1.5rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer p{font-size:.78rem;color:rgba(255,255,255,.25);}
+
+/* FADE */
+.fade{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease;}
+.fade.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.32s}.d4{transition-delay:.42s}
+
+/* MOBILE */
+@media(max-width:900px){
+  .about-grid,.why-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .proj-grid{grid-template-columns:repeat(2,1fr);}
+  .nav-links li:not(:last-child){display:none;}
+  .badge{left:.5rem;}
+}
+@media(max-width:540px){
+  .proj-grid{grid-template-columns:1fr;}
+  .feats{grid-template-columns:1fr;}
+  h1{font-size:3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#inicio"><span class="logo-g">A</span>SCADI</a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#invertir">Invertir</a></li>
+    <li><a href="#contacto" class="nav-btn">Más Información</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-img"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Desarrollo Inmobiliario · Bolivia</div>
+    <h1>Invertí en<br><span class="g">proyectos</span><br>inmobiliarios</h1>
+    <p class="hero-sub">Construimos casas de calidad y generamos retornos reales para nuestros inversores. Transparencia, gestión profesional y resultados comprobados.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-p">Quiero invertir</a>
+      <a href="#proyectos" class="btn-gh">Ver proyectos</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-grid">
+    <div class="img-wrap fade">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="Construcción Ascadi">
+      <div class="img-acc"></div>
+      <div class="badge"><big>18%</big><small>ROI Promedio</small></div>
+    </div>
+    <div>
+      <span class="tag fade">Quiénes somos</span>
+      <h2 class="h2 fade d1">Hacemos crecer<br>tu capital<br>con ladrillo</h2>
+      <div class="div fade d1"></div>
+      <p class="lead fade d2">Ascadi es una empresa boliviana especializada en levantar inversión para desarrollos residenciales. Construimos casas desde cero, gestionamos cada etapa del proyecto y distribuimos los retornos de forma transparente.</p>
+      <div class="feats">
+        <div class="feat fade d1">
+          <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><h4>Construcción propia</h4><p>Gestionamos cada obra directamente, sin intermediarios.</p></div>
+        </div>
+        <div class="feat fade d2">
+          <div class="f-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><h4>Rentabilidad real</h4><p>18% de ROI promedio con seguimiento continuo.</p></div>
+        </div>
+        <div class="feat fade d2">
+          <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><h4>Inversión segura</h4><p>Respaldada por activos físicos y contratos claros.</p></div>
+        </div>
+        <div class="feat fade d3">
+          <div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><h4>Plazos definidos</h4><p>Cronograma claro y entrega puntual en cada proyecto.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat fade"><div class="snum" data-target="3" data-sfx="">0</div><div class="slbl">Proyectos en Curso</div></div>
+    <div class="stat fade d1"><div class="snum" data-target="3" data-sfx="">0</div><div class="slbl">Proyectos Entregados</div></div>
+    <div class="stat fade d2"><div class="snum" data-target="450" data-pfx="+" data-sfx="K USD">0</div><div class="slbl">Dólares Ejecutados</div></div>
+    <div class="stat fade d3"><div class="snum" data-target="18" data-sfx="%">0</div><div class="slbl">ROI Promedio Anual</div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="proyectos">
+  <div class="proj-header">
+    <span class="tag fade">Nuestro portafolio</span>
+    <h2 class="h2 fade d1">Proyectos</h2>
+    <div class="div fade d1"></div>
+  </div>
+  <div class="proj-grid">
+    <div class="pcard fade">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Obra en construcción"></div>
+      <div class="pbody"><span class="pill pill-a">En construcción</span><div class="pname">Residencial Norte</div><div class="ploc">La Paz, Bolivia</div></div>
+    </div>
+    <div class="pcard fade d1">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1590725140246-20acdee442be?w=700&q=80" alt="Proyecto en curso"></div>
+      <div class="pbody"><span class="pill pill-a">En construcción</span><div class="pname">El Mirador</div><div class="ploc">Cochabamba, Bolivia</div></div>
+    </div>
+    <div class="pcard fade d2">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=700&q=80" alt="Construcción de casa"></div>
+      <div class="pbody"><span class="pill pill-a">En construcción</span><div class="pname">Villa San Marcos</div><div class="ploc">Santa Cruz, Bolivia</div></div>
+    </div>
+    <div class="pcard fade">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Casa entregada"></div>
+      <div class="pbody"><span class="pill pill-d">Entregado</span><div class="pname">Casa Primavera</div><div class="ploc">La Paz, Bolivia</div></div>
+    </div>
+    <div class="pcard fade d1">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Vivienda entregada"></div>
+      <div class="pbody"><span class="pill pill-d">Entregado</span><div class="pname">Los Pinos</div><div class="ploc">La Paz, Bolivia</div></div>
+    </div>
+    <div class="pcard fade d2">
+      <div class="pimg"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=700&q=80" alt="Casa entregada Ascadi"></div>
+      <div class="pbody"><span class="pill pill-d">Entregado</span><div class="pname">Proyecto Oeste</div><div class="ploc">Cochabamba, Bolivia</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="invertir">
+  <div class="why-grid">
+    <div>
+      <span class="tag fade">Por qué elegirnos</span>
+      <h2 class="h2 fade d1">Tu inversión,<br>en buenas manos</h2>
+      <div class="div fade d1"></div>
+      <div class="wcards">
+        <div class="wcard fade d1"><div class="wn">01</div><div><h4>Activos reales como respaldo</h4><p>Tu capital está respaldado por inmuebles físicos. El ladrillo no desaparece ni pierde valor de un día para el otro.</p></div></div>
+        <div class="wcard fade d2"><div class="wn">02</div><div><h4>Retornos superiores al mercado</h4><p>Generamos un ROI promedio del 18% anual, muy por encima de los instrumentos financieros tradicionales en Bolivia.</p></div></div>
+        <div class="wcard fade d3"><div class="wn">03</div><div><h4>Transparencia total</h4><p>Acceso a reportes de avance, estados financieros y visitas a obra. Sabés en todo momento dónde está tu dinero.</p></div></div>
+        <div class="wcard fade d4"><div class="wn">04</div><div><h4>Gestión profesional completa</h4><p>Desde la compra del terreno hasta la entrega de llaves, nos encargamos de todo con responsabilidad y experiencia.</p></div></div>
+      </div>
+    </div>
+    <div class="img-wrap fade">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Casa moderna Ascadi">
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contacto">
+  <div class="cta-ghost">ASCADI</div>
+  <span class="tag fade">Contacto</span>
+  <h2 class="h2 fade d1">¿Listo para<br>invertir con nosotros?</h2>
+  <div class="div fade d1" style="margin:1.2rem auto 1.5rem;"></div>
+  <p class="lead fade d2">Dejanos tu nombre y correo y un miembro de nuestro equipo se contactará para contarte cómo funciona el proceso de inversión paso a paso.</p>
+  <form class="cta-form fade d2" id="cForm">
+    <input type="text" id="iName" placeholder="Tu nombre completo" required>
+    <input type="email" id="iEmail" placeholder="Tu correo electrónico" required>
+    <button type="submit" class="btn-p">Quiero más info</button>
+  </form>
+  <div class="thanks" id="thanks">✓ &nbsp;¡Gracias! Te contactamos muy pronto.</div>
+  <p class="cta-note fade d3">O escribinos directamente a <a href="mailto:info@ascadi.bo">info@ascadi.bo</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="font-size:1.5rem;"><span class="logo-g">A</span>SCADI</div>
+  <p>© 2025 Ascadi · Desarrollo Inmobiliario · Bolivia</p>
+  <p>info@ascadi.bo</p>
+</footer>
+
+<script>
+// Sticky nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+// Counter animation
+function animateCounter(el) {
+  if (el.dataset.done) return;
+  el.dataset.done = '1';
+  const target = +el.dataset.target;
+  const pfx = el.dataset.pfx || '';
+  const sfx = el.dataset.sfx || '';
+  let start = null;
+  const dur = 1800;
+  const tick = (ts) => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = Math.floor(ease * target);
+    el.innerHTML = `<span style="color:var(--gold)">${pfx}</span>${val}<span style="color:var(--gold)">${sfx}</span>`;
+    if (p < 1) requestAnimationFrame(tick);
+    else el.innerHTML = `<span style="color:var(--gold)">${pfx}</span>${target}<span style="color:var(--gold)">${sfx}</span>`;
+  };
+  requestAnimationFrame(tick);
+}
+
+// Intersection observer
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('on');
+    const c = e.target.querySelector('[data-target]') || (e.target.dataset.target ? e.target : null);
+    if (c && c.dataset.target) animateCounter(c);
+  });
+}, { threshold: 0.18 });
+
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+document.querySelectorAll('.stat').forEach(el => obs.observe(el));
+
+// Form submit
+document.getElementById('cForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('iName').value;
+  const email = document.getElementById('iEmail').value;
+  const sub = encodeURIComponent('Solicitud de información – Ascadi');
+  const body = encodeURIComponent(`Hola equipo Ascadi,\n\nMi nombre es ${name} y me gustaría recibir más información sobre cómo invertir con ustedes.\n\nMi correo de contacto: ${email}\n\nQuedo a la espera de su respuesta.\n\nSaludos,\n${name}`);
+  window.location.href = `mailto:info@ascadi.bo?subject=${sub}&body=${body}`;
+  document.getElementById('cForm').style.display = 'none';
+  document.getElementById('thanks').style.display = 'block';
+});
+</script>
+</body>
+</html>
