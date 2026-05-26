@@ -278,13 +278,13 @@ footer p{font-size:.78rem;color:rgba(255,255,255,.25);}
     <button type="submit" class="btn-p">Quiero más info</button>
   </form>
   <div class="thanks" id="thanks">✓ &nbsp;¡Gracias! Te contactamos muy pronto.</div>
-  <p class="cta-note fade d3">O escribinos directamente a <a href="mailto:info@ascadi.bo">info@ascadi.bo</a></p>
+  <p class="cta-note fade d3">O escribinos directamente a <a href="mailto:cesar.camacho.oviedo@gmail.com">info@ascadi.bo</a></p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="logo" style="font-size:1.5rem;"><span class="logo-g">A</span>SCADI</div>
-  <p>© 2025 Ascadi · Desarrollo Inmobiliario · Bolivia</p>
+  <p>© 2025 Ascadi · Desarrollo e Inversiones · Bolivia</p>
   <p>info@ascadi.bo</p>
 </footer>
 
@@ -334,7 +334,7 @@ document.getElementById('cForm').addEventListener('submit', function(e) {
   const email = document.getElementById('iEmail').value;
   const sub = encodeURIComponent('Solicitud de información – Ascadi');
   const body = encodeURIComponent(`Hola equipo Ascadi,\n\nMi nombre es ${name} y me gustaría recibir más información sobre cómo invertir con ustedes.\n\nMi correo de contacto: ${email}\n\nQuedo a la espera de su respuesta.\n\nSaludos,\n${name}`);
-  window.location.href = `mailto:info@ascadi.bo?subject=${sub}&body=${body}`;
+  window.location.href = `mailto:cesar.camacho.oviedo@gmail.com?subject=${sub}&body=${body}`;
   document.getElementById('cForm').style.display = 'none';
   document.getElementById('thanks').style.display = 'block';
 });
